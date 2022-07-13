@@ -1,5 +1,8 @@
 class GameController < ApplicationController
 
+  protect_from_forgery with: :null_session
+  skip_before_action :verify_authenticity_token
+  
   def initialize
     super
     @lives = 9
@@ -28,7 +31,7 @@ class GameController < ApplicationController
       render('result')
     end
 
-    render('v2')
+    render('word_guess')
   end
 
 
