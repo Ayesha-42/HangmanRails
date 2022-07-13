@@ -19,7 +19,17 @@ class GameController < ApplicationController
     else
       @lives -= 1
     end
-  
+    if @hidden_word.join('') == @word_to_guess
+      @message = "You won the game!"
+      render('result')
+    end
+    if @lives<1
+      @message = "Unfortunately, you've run out of chances to guess, better luck next time!"
+      render('result')
+    end
+
     render('v2')
   end
+
+
 end
