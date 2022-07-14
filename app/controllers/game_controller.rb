@@ -1,13 +1,14 @@
 class GameController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  def initialize
+  # def start
+  def initilize
     super
     @lives ||= 9
     @words ||= %w[programming fun internship ruby rails coding design]
 
     @word_to_guess ||= @words.sample
-    @hidden_word ||= @word_to_guess.chars.map { "_" }
+    @hidden_word = @word_to_guess.chars.map { '_' }
   end
 
   def word_guess
@@ -20,15 +21,15 @@ class GameController < ApplicationController
     else
       @lives -= 1
     end
-    if @hidden_word.join("") == @word_to_guess
-      @message = "You won the game!"
-      render("result")
+    if @hidden_word.join('') == @word_to_guess
+      @message = 'You won the game!'
+      render('result')
     end
     if @lives < 1
       @message = "Unfortunately, you've run out of chances to guess, better luck next time!"
-      render("result")
+      render('result')
     end
 
-    render("word_guess")
+    render('word_guess')
   end
 end
