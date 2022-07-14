@@ -1,0 +1,9 @@
+<h1>Welcome to the Hangman Game Web Application!</h1>
+
+<h3> How the game works:</h3>
+<p> The computer will pick out a word for you to guess. You have 9 chances to guess the word by guessing one-letter at-a-time. If the letter is in the word it shall be revealed.
+</p>
+<p> Once all the letters are correctly guessed by you and revealed, you shall win the game!</p>
+
+<%= link_to('Start Playing!', {:action => 'word_guess', :guess =>''}) %><br />
+<!--<%= @word_to_guess%>-->

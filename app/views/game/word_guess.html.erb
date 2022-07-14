@@ -1,0 +1,18 @@
+<body>
+
+    <p>Guess this word: <%= @hidden_word.join(' ') %></p>
+    <br />
+    <form method="post" action="/word_guess">
+
+      <label>Your Guess:</label>
+      <input name="guess" type="text" />
+      <br /> <br />
+
+      <input type="submit" value="Word Guess"  />
+    </form>
+
+    <p>You have <%=@lives %> chances left to guess</p>
+</body>
+
+
+
