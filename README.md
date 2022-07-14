@@ -1,15 +1,25 @@
-# README
+# Hangman Web Application Game
 
-This is a simple web application game of Hangman
+This is a simple web application game of Hangman.
 
-In order to run this game on your local system, keep these specs and steps in mind:
+## Steps to run application on local system:
 
-* Ruby versions 2.7.0 or later to run Rails
+* Ruby versions 2.7.0 or later is required to support Rails.
 
-* Use ```gem install rails``` to install rails 7.0.0 or later
+* clone the repository and reach the HangmanRailsGame directory:
+```
+$ git clone https://github.com/Ayesha-42/HangmanRails.git
+$ cd HangmanRailsGame
+```
 
-* Use ```bundle install``` to run the Gemfile and install/update all the required gems from the app directory ```cd HangmanRailsGame```
+* Run the Gemfile and install/use all the required gems:
+```
+bundle install
+```
 
-* To start the web server to run your web application use ```rails server``` command.
+* Start the web server to run your web application:
+```
+rails s
+```
 
 * Open the url ```localhost:3000``` on a web browser to reach the landing page of the game for further instructions.
