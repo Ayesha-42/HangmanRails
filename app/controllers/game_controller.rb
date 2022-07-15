@@ -3,7 +3,7 @@ class GameController < ApplicationController
 
   def start
     words = %w[programming fun internship ruby rails coding design]
-    game = GameSession.new(word_to_guess: words.sample)
+    game = GameSession.new(word_to_guess: words.sample, guesses: '')
     game.save
     render('start')
   end
@@ -11,7 +11,9 @@ class GameController < ApplicationController
   def word_guess
     user_guess = params[:guess] # .chomp.downcase
     game = GameSession.last
-    @hidden_word = game.word_to_guess.chars.map { '_' }
+    guesses = game.guesses
+    game.update(guesses: guesses + user_guess)
+    @hidden_word = game.get_hidden_word
     @lives = 9
     render('word_guess')
   end

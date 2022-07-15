@@ -1,2 +1,15 @@
 class GameSession < ApplicationRecord
+
+  def get_hidden_word
+    hidden_word = word_to_guess.chars.map { '_' }
+    guesses.chars.each do |letter|
+      if word_to_guess.include? letter
+        hidden_word = hidden_word.filter_map.with_index do |hidden_letter, index|
+          letter == word_to_guess[index] ? letter : hidden_letter
+        end
+      end
+    end
+    hidden_word
+  end
+
 end
