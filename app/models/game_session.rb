@@ -1,5 +1,5 @@
 class GameSession < ApplicationRecord
-  LIVES = 9
+  LIVES = 5
 
   def lives
     updated_lives = LIVES
@@ -21,6 +21,10 @@ class GameSession < ApplicationRecord
       end
     end
     hidden_word
+  end
+
+  def win?
+    get_hidden_word.join('') == word_to_guess
   end
 
 end

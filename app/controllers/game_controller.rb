@@ -16,7 +16,12 @@ class GameController < ApplicationController
     @hidden_word = game.get_hidden_word
 
     @lives = game.lives
-    if @lives< 1
+    if game.win?
+      redirect_to(:action => 'result', :message => "Yay! you won the game :)", :word => game.word_to_guess)
+      return
+    end
+
+    if @lives < 1
       redirect_to(:action => 'result', :message => "Sorry, you've run out of lives :(", :word => game.word_to_guess)
       return
     end
