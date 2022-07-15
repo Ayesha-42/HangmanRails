@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root "game#start"
+  map.root :controller => "start"
   get "/game", to: "game#start"
 
   get "/game/word_guess", to: "game#word_guess"
