@@ -14,7 +14,20 @@ class GameController < ApplicationController
     guesses = game.guesses
     game.update(guesses: guesses + user_guess)
     @hidden_word = game.get_hidden_word
-    @lives = 9
+
+    @lives = game.lives
+    if @lives< 1
+      redirect_to(:action => 'result', :message => "Sorry, you've run out of lives :(", :word => game.word_to_guess)
+      return
+    end
+
     render('word_guess')
   end
+
+  def result
+    @word_to_guess = params[:word]
+    @message = params[:message]
+    render('result')
+  end
+
 end

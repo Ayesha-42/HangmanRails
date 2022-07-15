@@ -1,4 +1,15 @@
 class GameSession < ApplicationRecord
+  LIVES = 9
+
+  def lives
+    updated_lives = LIVES
+    guesses.chars.each do |letter|
+      if word_to_guess.exclude? letter
+        updated_lives -= 1
+      end
+    end
+    updated_lives
+  end
 
   def get_hidden_word
     hidden_word = word_to_guess.chars.map { '_' }
