@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  root 'game#start'
-  get '/game', to: 'game#start'
+  root 'game_session#start'
+  get '/game_session', to: 'gamesession#start'
 
-  get '/game/word_guess', to: 'game#word_guess'
-  post '/word_guess' => 'game#word_guess'
+  get '/game_session/word_guess', to: 'game_session#word_guess'
+  post '/word_guess' => 'game_session#word_guess'
 
-  get '/game/result', to: 'game#result'
+  get '/game_session/result', to: 'game_session#result'
 end
