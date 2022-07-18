@@ -4,10 +4,6 @@ class GameSession < ApplicationRecord
 
   before_create :set_word
 
-  def set_word
-    self.word_to_guess = WORDS.sample
-  end
-
   def lives_remaining
     updated_lives = TOTAL_LIVES
     guesses.chars.each do |letter|
@@ -34,5 +30,11 @@ class GameSession < ApplicationRecord
 
   def loss?
     lives_remaining < 1
+  end
+
+  private
+
+  def set_word
+    self.word_to_guess = WORDS.sample
   end
 end
