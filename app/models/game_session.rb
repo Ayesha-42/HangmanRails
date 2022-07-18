@@ -1,30 +1,38 @@
 class GameSession < ApplicationRecord
-  LIVES = 5
+  TOTAL_LIVES = 9
+  WORDS = %w[programming fun internship ruby rails coding design].freeze
 
-  def lives
-    updated_lives = LIVES
+  before_create :set_word
+
+  def set_word
+    self.word_to_guess = WORDS.sample
+  end
+
+  def lives_remaining
+    updated_lives = TOTAL_LIVES
     guesses.chars.each do |letter|
-      if word_to_guess.exclude? letter
-        updated_lives -= 1
-      end
+      updated_lives -= 1 if word_to_guess.exclude? letter
     end
     updated_lives
   end
 
-  def get_hidden_word
+  def hidden_word
     hidden_word = word_to_guess.chars.map { '_' }
     guesses.chars.each do |letter|
-      if word_to_guess.include? letter
-        hidden_word = hidden_word.filter_map.with_index do |hidden_letter, index|
-          letter == word_to_guess[index] ? letter : hidden_letter
-        end
+      next unless word_to_guess.include? letter
+
+      hidden_word = hidden_word.filter_map.with_index do |hidden_letter, index|
+        letter == word_to_guess[index] ? letter : hidden_letter
       end
     end
     hidden_word
   end
 
   def win?
-    get_hidden_word.join('') == word_to_guess
+    hidden_word.join('') == word_to_guess
   end
 
+  def loss?
+    lives_remaining < 1
+  end
 end

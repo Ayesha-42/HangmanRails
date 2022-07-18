@@ -2,31 +2,25 @@ class GameController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def start
-    words = %w[programming fun internship ruby rails coding design]
-    game = GameSession.new(word_to_guess: words.sample, guesses: '')
-    game.save
+    GameSession.create
     render('start')
   end
 
   def word_guess
     user_guess = params[:guess] # .chomp.downcase
     game = GameSession.last
-    guesses = game.guesses
+    guesses = game.guesses || ''
     game.update(guesses: guesses + user_guess)
-    @hidden_word = game.get_hidden_word
+    @hidden_word = game.hidden_word
 
-    @lives = game.lives
+    @lives_remaining = game.lives_remaining
     if game.win?
-      redirect_to(:action => 'result', :message => "Yay! you won the game :)", :word => game.word_to_guess)
-      return
+      redirect_to(action: 'result', message: 'Yay! you won the game :)', word: game.word_to_guess)
+    elsif game.loss?
+      redirect_to(action: 'result', message: "Sorry, you've run out of lives :(", word: game.word_to_guess)
+    else
+      render('word_guess')
     end
-
-    if @lives < 1
-      redirect_to(:action => 'result', :message => "Sorry, you've run out of lives :(", :word => game.word_to_guess)
-      return
-    end
-
-    render('word_guess')
   end
 
   def result
@@ -34,5 +28,4 @@ class GameController < ApplicationController
     @message = params[:message]
     render('result')
   end
-
 end
