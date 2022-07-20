@@ -1,7 +1,6 @@
 class CreateGames < ActiveRecord::Migration[7.0]
   def change
     create_table :games do |t|
-      t.string :id
       t.string :word_to_guess
       t.integer :lives
       t.string :hidden_word

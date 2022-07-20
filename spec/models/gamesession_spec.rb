@@ -1,5 +1,20 @@
 require 'rails_helper'
 
-RSpec.describe Gamesession, type: :model do
-  # pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe GameSession, type: :model do
+  subject { GameSession.new }
+  before { subject.save }
+  it 'word_to_guess should be assigned' do
+    expect(subject.word_to_guess).to_not eq(nil)
+  end
+
+  it 'should have an array list to select from' do
+    defined? GameSession::WORDS
+  end
+  it 'should select word_to_guess from the words array' do
+    expect(GameSession::WORDS).to include(subject.word_to_guess)
+  end
+
+  it 'should not have any user guesses to check' do
+    expect(subject.guesses).to eq(nil)
+  end
 end
