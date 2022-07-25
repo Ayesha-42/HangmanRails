@@ -42,4 +42,28 @@ RSpec.describe 'GameSession methods' do
     end
   end
 
+  context '#hidden_word' do
+    it 'initial value when no letter has been guessed' do
+      test_record.guesses = ''
+      expect(test_record.hidden_word.join('')).to eq('____')
+    end
+    it 'when all are incorrect guesses' do
+      test_record.guesses = 'aa'
+      expect(test_record.hidden_word.join('')).to eq('____')
+    end
+    it 'revealing the letter when guessed correctly' do
+      test_record.guesses = 't'
+      expect(test_record.hidden_word.join('')).to eq('t__t')
+    end
+    it 'should only reveal the correctly guessed letter from all the guesses' do
+      test_record.guesses = 'ta'
+      expect(test_record.hidden_word.join('')).to eq('t__t')
+    end
+    it 'should check and reveal different correct guesses in their respective positions in the word' do
+      test_record.guesses = 'tae'
+      expect(test_record.hidden_word.join('')).to eq('te_t')
+      test_record.guesses = 'tst'
+      expect(test_record.hidden_word.join('')).to eq('t_st')
+    end
+  end
 end

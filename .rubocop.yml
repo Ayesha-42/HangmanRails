@@ -4,6 +4,9 @@ require:
 Metrics/MethodLength:
   Max: 20
 
+Metrics/BlockLength:
+  Max: 90
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 
