@@ -66,4 +66,15 @@ RSpec.describe 'GameSession methods' do
       expect(test_record.hidden_word.join('')).to eq('t_st')
     end
   end
+
+  context '#win?' do
+    it 'should declare a win when the word is completely guessed' do
+      test_record.guesses = 'tes'
+      expect(test_record.win?).to eq(true)
+    end
+    it 'should not declare a win as the word is not completely guessed' do
+      test_record.guesses = 'teaa'
+      expect(test_record.win?).to eq(false)
+    end
+  end
 end
