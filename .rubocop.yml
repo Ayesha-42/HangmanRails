@@ -4,6 +4,10 @@ require:
 Metrics/MethodLength:
   Max: 20
 
+Metrics/BlockLength:
+  Exclude:
+    - spec\models\game_session_spec.rb
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 
