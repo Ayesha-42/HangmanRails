@@ -77,4 +77,15 @@ RSpec.describe 'GameSession methods' do
       expect(test_record.win?).to eq(false)
     end
   end
+
+  context '#loss?' do
+    it 'should resume game, not declare loss, when there are lives left to guess' do
+      test_record.guesses = 'aaa'
+      expect(test_record.loss?).to eq(false)
+    end
+    it 'should declare a loss when 9 chances of guessing are used up' do
+      test_record.guesses = 'aaaaaaaaaa'
+      expect(test_record.loss?).to eq(true)
+    end
+  end
 end
